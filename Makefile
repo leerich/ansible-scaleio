@@ -36,6 +36,19 @@ test-centos-7: prep-centos-env
 	-e "scaleio_sdc_driver_sync_emc_public_gpg_key_src=$(SCALEIO_COMMON_FILE_INSTALL_FILE_LOCATION)/2.0/common/RPM-GPG-KEY-ScaleIO_2.0.5014.0" \
 	site.yml
 
+#
+# ANSIBLE_FLAGS='-b -i hosts-3_node -e ansible_python_interpreter="/usr/bin/python"' ansible-playbook
+.PHONY:
+test-vagrant-centos-7:
+	ansible-playbook $(ANSIBLE_FLAGS) \
+	--ssh-common-args="-F $(SSH_CONFIG)" \
+	-e "scaleio_cluster_mode=3_node" \
+	-e "scaleio_interface=enp0s8" \
+	-e "scaleio_gateway_is_redundant=false" \
+	-e "scaleio_common_file_install_file_location=$(HOME)/src/scaleio/2.0.1.0/RHEL/7" \
+	site.yml
+
+
 .PHONY:
 test: test-ubuntu-trusty test-centos-7
 
@@ -79,14 +92,14 @@ clean-ubuntu-env:
 		$(TRITON_EXEC) inst rm -w $$node ; \
 	done
 	if [ -f $(SSH_CONFIG) ]; then rm $(SSH_CONFIG) ; fi
-	
+
 .PHONY:
 clean-centos-env:
 	for node in `$(TRITON_EXEC) inst ls -Ho id`; do \
                 $(TRITON_EXEC) inst rm -w $$node ; \
         done
 	if [ -f $(SSH_CONFIG) ]; then rm $(SSH_CONFIG) ; fi
-        
+
 
 .PHONY:
 clean:
