@@ -1,5 +1,5 @@
 scaleio_license:
-scaleio_protection_domain: protection_domain1
+scaleio_protection_domain: domain1
 scaleio_cluster_name: cluster1
 scaleio_storage_pool: pool1
 
@@ -12,17 +12,21 @@ scaleio_storage_pool: pool1
 #   - {fs: 'fs3', sds: 'sio5'}
 #   - {fs: 'fs3', sds: 'sio6'}
 
-scaleio_cluster_mode: "5_node"
+scaleio_cluster_mode: "3_node"
 
 scaleio_interface: eth1
-scaleio_password: Cluster1!
+scaleio_password: Password123
 
 scaleio_common_file_install_file_location: "../files"
 
-scaleio_gateway_admin_password: 'Cluster1!'
+scaleio_gateway_admin_password: 'Password123'
 scaleio_gateway_user_properties_file: '/opt/emc/scaleio/gateway/webapps/ROOT/WEB-INF/classes/gatewayUser.properties'
 
-scaleio_lia_token: 'Cluster1!'
+scaleio_gateway_http_port: '80'
+scaleio_gateway_https_port: '443'
+scaleio_gateway_catalina_properties_file: '/opt/emc/scaleio/gateway/conf/catalina.properties'
+
+scaleio_lia_token: 'Scaleio123'
 scaleio_lia_conf_file: '/opt/emc/scaleio/lia/cfg/conf.txt'
 
 scaleio_sdc_driver_sync_repo_address: 'ftp://ftp.emc.com/'
@@ -39,6 +43,6 @@ scaleio_sdc_driver_sync_emc_public_gpg_key_dest: '/bin/emc/scaleio/scini_sync/em
 scaleio_sdc_driver_sync_sync_pattern: .*
 
 scaleio_sds_number: 1
-scaleio_sds_disks: { ansible_available_disks: ['/mnt/scaleio1'] }
+scaleio_sds_disks: { ansible_available_disks: ['/dev/sdb'] }
 
 scaleio_skip_java: false

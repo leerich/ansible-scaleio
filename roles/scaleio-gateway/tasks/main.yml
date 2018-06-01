@@ -8,3 +8,24 @@
 
 - include: install_keepalived.yml
   when: scaleio_gateway_is_redundant == "true"
+
+- name: configure gateway with mdm addresses
+  lineinfile: name="{{ scaleio_gateway_user_properties_file }}"
+              regexp='^mdm.ip.addresses'
+              line="mdm.ip.addresses={{ scaleio_mdm_ips }}"
+
+- name: configure gateway to accept certificates
+  lineinfile: name="{{ scaleio_gateway_user_properties_file }}"
+              regexp='^security.bypass_certificate_check'
+              line="security.bypass_certificate_check=true"
+
+- name: configure gateway http port
+  lineinfile: name="{{ scaleio_gateway_catalina_properties_file }}"
+              regexp='^http.port'
+              line="http.port={{ scaleio_gateway_http_port }}"
+
+- name: configure gateway https port
+  lineinfile: name="{{ scaleio_gateway_catalina_properties_file }}"
+              regexp='^ssl.port'
+              line="ssl.port={{ scaleio_gateway_https_port }}"
+
