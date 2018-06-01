@@ -1,8 +1,6 @@
 ansible-scaleio
 ===============
 
-# NEED NEW MAINTAINER
-
 ansible-scaleio is a way to manage
 [ScaleIO](http://www.emc.com/storage/scaleio/index.htm "ScaleIO") through
 [Ansible](http://www.ansible.com/home "Ansible").

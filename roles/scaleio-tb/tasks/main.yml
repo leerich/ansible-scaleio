@@ -1,5 +1,11 @@
 - include: ../../scaleio-common/tasks/install_scaleio.yml
 
+- name: Get ScaleIO version
+  shell: scli --version  | sed 's/ (Debug)//g' | sed 's/.* //g' | sed 's/\_.*//g'
+  register: scaleio_version
+  tags: register
+  delegate_to: "{{ scaleio_mdm_primary_hostname }}"
+
 - name: login with new password
   command: scli --login --username admin --password "{{ scaleio_password }}"
   run_once: true
@@ -47,11 +53,27 @@
   run_once: true
   delegate_to: "{{ scaleio_mdm_primary_hostname }}"
   register: add_fs
+  when:
+    - scaleio_fault_sets is defined
 
-
-- name: add storage pool
+- name: add storage pool R2
   command: scli --mdm_ip {{ scaleio_mdm_ips }} --add_storage_pool --protection_domain_name {{ scaleio_protection_domain }} --storage_pool_name {{ scaleio_storage_pool }}
+  when: scaleio_version.stdout == "R2"
   run_once: true
   register: storage_pool_add
   delegate_to: "{{ scaleio_mdm_primary_hostname }}"
   changed_when: (storage_pool_add.rc == 7) or (storage_pool_add.rc == 0)
+
+- name: add storage pool R3
+  command: scli --mdm_ip {{ scaleio_mdm_ips }} --add_storage_pool --media_type HDD --protection_domain_name {{ scaleio_protection_domain }} --storage_pool_name {{ scaleio_storage_pool }}
+  when: scaleio_version.stdout == "R3"
+  run_once: true
+  register: storage_pool_add
+  delegate_to: "{{ scaleio_mdm_primary_hostname }}"
+  changed_when: (storage_pool_add.rc == 7) or (storage_pool_add.rc == 0)
+
+- name: enable zero-padding
+  command: scli --modify_zero_padding_policy --protection_domain_name {{ scaleio_protection_domain }} --storage_pool_name {{ scaleio_storage_pool }} --enable_zero_padding
+  run_once: true
+  delegate_to: "{{ scaleio_mdm_primary_hostname }}"
+
