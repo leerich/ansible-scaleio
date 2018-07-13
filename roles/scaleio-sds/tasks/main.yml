@@ -36,7 +36,7 @@
   with_items: scaleio_fault_sets
 
 - name: add sds devices
-  command: scli --add_sds_device --sds_ip {{ hostvars[inventory_hostname]['ansible_'+scaleio_interface]['ipv4']['address'] }} --protection_domain_name {{ scaleio_protection_domain }} --storage_pool_name {{ scaleio_storage_pool }} --device_path {{ disks.ansible_available_disks|join(',') }}
+  command: scli --add_sds_device --mdm_ip {{ scaleio_mdm_ips }} --sds_ip {{ hostvars[inventory_hostname]['ansible_'+scaleio_interface]['ipv4']['address'] }} --protection_domain_name {{ scaleio_protection_domain }} --storage_pool_name {{ scaleio_storage_pool }} --device_path {{ disks.ansible_available_disks|join(',') }}
   retries: 10
   delay: 5
   register: add_devices
