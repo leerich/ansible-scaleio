@@ -15,4 +15,4 @@
 - name: install package
   raw: "/var/tmp/package_wrapper.sh rpm -i {{ package_file.files[0].path }}"
   when: ansible_distribution == "CentOS"
-  #ignore_errors: yes
+  ignore_errors: yes
