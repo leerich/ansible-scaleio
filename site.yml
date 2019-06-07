@@ -9,7 +9,7 @@
     GW_COUNT: "{{ groups['gateway'] | length }}"
   tasks:
     #- set_fact: scaleio_mdm_primary_ip="{{ hostvars[groups['mdm'][0]]['ansible_'+scaleio_interface]['ipv4']['address'] }}"
-    - set_fact: scaleio_mdm_primary_ip="{{ hostvars[groups['mdm'][0]]'ansible_ssh_host' }}"
+    - set_fact: scaleio_mdm_primary_ip="{{ hostvars[groups['mdm'][0]]['ansible_ssh_host'] }}"
     - set_fact: scaleio_mdm_primary_hostname="{{ hostvars[groups['mdm'][0]]['inventory_hostname'] }}"
     - set_fact: scaleio_mdm_secondary_ip="{{ hostvars[groups['mdm'][1]]['ansible_'+scaleio_interface]['ipv4']['address'] }}"
     - set_fact: scaleio_mdm_secondary_hostname="{{ hostvars[groups['mdm'][1]]['inventory_hostname'] }}"
