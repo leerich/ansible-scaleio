@@ -1,0 +1,35 @@
+[scaleio]
+#node0 ansible_ssh_host=NODE0 ansible_ssh_port=22 ansible_ssh_pass=PASSWORD
+#node1 ansible_ssh_host=NODE1 ansible_ssh_port=22 ansible_ssh_pass=PASSWORD
+#node2 ansible_ssh_host=NODE2 ansible_ssh_port=22 ansible_ssh_pass=PASSWORD
+node0
+node1
+node2
+
+[mdm]
+node0
+node1
+
+[tb]
+node2
+
+[sds]
+node0
+node1
+node2
+
+[lia]
+node0
+node1
+node2
+
+[gateway]
+node2
+
+[gui]
+node0
+
+[sdc]
+node0
+node1
+node2
