@@ -2,9 +2,9 @@
 #node0 ansible_ssh_host=NODE0 ansible_ssh_port=22 ansible_ssh_pass=PASSWORD
 #node1 ansible_ssh_host=NODE1 ansible_ssh_port=22 ansible_ssh_pass=PASSWORD
 #node2 ansible_ssh_host=NODE2 ansible_ssh_port=22 ansible_ssh_pass=PASSWORD
-node0 ansible_ssh_host=tag_Name_node0
-node1
-node2
+node0 ansible_ssh_host=3.89.102.176
+node1 ansible_ssh_host=3.95.222.254
+node2 ansible_ssh_host=52.207.221.159
 
 [mdm]
 node0
